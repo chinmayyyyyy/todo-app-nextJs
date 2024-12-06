@@ -10,13 +10,12 @@ const formatDate = (date: Date) => {
 const Home: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [dates, setDates] = useState<Date[]>([]);
+  const [showAddTaskForm, setShowAddTaskForm] = useState(false);
 
-  // Filtered dates till today 
   const getDatesUpToToday = () => {
     const today = new Date();
     const activeDates: Date[] = [];
 
-    // Loop through the current month and add all dates until today
     for (let day = 1; day <= today.getDate(); day++) {
       const activeDate = new Date(today.getFullYear(), today.getMonth(), day);
       activeDates.push(activeDate);
@@ -33,29 +32,42 @@ const Home: React.FC = () => {
     setSelectedDate(date);
   };
 
-  return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
-      <h1 className="text-2xl text-blue font-bold mb-5">To-Do List</h1>
+  const toggleAddTaskForm = () => {
+    setShowAddTaskForm((prev) => !prev);
+  };
 
-      <div className="mb-4">
-        <h2 className="text-xl font-semibold">Active Dates</h2>
-        <div className="flex gap-4 overflow-x-auto py-2">
-          {dates.map((activeDate, index) => (
-            <div
+  return (
+    <div className="min-h-screen bg-black py-10 px-6 text-white relative">
+      <div className="bg-gray-900 shadow-lg rounded-lg p-6 mb-6">
+        <h1 className="text-3xl font-bold text-white">Todo ?</h1>
+        <div className="flex justify-center gap-2 mt-4">
+          {dates.map((date, index) => (
+            <button
               key={index}
-              className={`flex items-center justify-center flex-col cursor-pointer ${
-                selectedDate.toDateString() === activeDate.toDateString() ? 'bg-blue-500 text-white' : ''
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                selectedDate.toDateString() === date.toDateString()
+                  ? 'bg-white text-black'
+                  : 'bg-gray-700 text-gray-300'
               }`}
-              onClick={() => handleDateChange(activeDate)}
+              onClick={() => handleDateChange(date)}
             >
-              <div className="font-semibold">{formatDate(activeDate)}</div>
-            </div>
+              {formatDate(date)}
+            </button>
           ))}
         </div>
       </div>
 
-      <AddTaskForm selectedDate={selectedDate} />
+      {showAddTaskForm && <AddTaskForm selectedDate={selectedDate} />}
+
       <ToDoList selectedDate={selectedDate} />
+
+      <button
+        onClick={toggleAddTaskForm}
+        className="fixed bottom-8 right-8 p-4 rounded-full bg-blue-600 text-white text-2xl font-bold shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all"
+        title="Add Task"
+      >
+        +
+      </button>
     </div>
   );
 };
