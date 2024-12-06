@@ -37,17 +37,17 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black py-10 px-6 text-white relative">
-      <div className="bg-gray-900 shadow-lg rounded-lg p-6 mb-6">
-        <h1 className="text-3xl font-bold text-white">Todo ?</h1>
-        <div className="flex justify-center gap-2 mt-4">
+    <div className="min-h-screen bg-white py-10 px-6 text-black relative">
+      <div className="bg-gray-100 shadow-lg rounded-lg p-6 mb-6 border border-gray-300">
+        <h1 className="text-3xl font-bold text-black">TODO</h1>
+          <div className="flex overflow-x-auto gap-2 mt-4 scrollbar-thin  justify-center scrollbar-thumb-gray-400 scrollbar-track-gray-200">
           {dates.map((date, index) => (
             <button
               key={index}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 selectedDate.toDateString() === date.toDateString()
-                  ? 'bg-white text-black'
-                  : 'bg-gray-700 text-gray-300'
+                  ? 'bg-black text-white'
+                  : 'bg-gray-200 text-gray-700'
               }`}
               onClick={() => handleDateChange(date)}
             >
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
 
       <button
         onClick={toggleAddTaskForm}
-        className="fixed bottom-8 right-8 p-4 rounded-full bg-blue-600 text-white text-2xl font-bold shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all"
+        className="fixed bottom-8 right-8 p-4 rounded-full bg-black text-white text-2xl font-bold shadow-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-500 transition-all"
         title="Add Task"
       >
         +
