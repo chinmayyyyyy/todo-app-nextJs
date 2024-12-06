@@ -37,17 +37,18 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white py-10 px-6 text-black relative">
-      <div className="bg-gray-100 shadow-lg rounded-lg p-6 mb-6 border border-gray-300">
-        <h1 className="text-3xl font-bold text-black">TODO</h1>
-          <div className="flex overflow-x-auto gap-2 mt-4 scrollbar-thin  justify-center scrollbar-thumb-gray-400 scrollbar-track-gray-200">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 py-10 px-6 text-gray-800 relative">
+      <div className="bg-white  shadow-lg rounded-xl p-6 mb-6 border border-gray-300">
+        <h1 className="text-4xl font-extrabold text-gray-800 tracking-wide">To-Do Manager</h1>
+        <p className="text-gray-600 text-sm mt-2">Stay organized and track your tasks effortlessly.</p>
+        <div className="flex justify-center overflow-x-auto gap-3 mt-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-200">
           {dates.map((date, index) => (
             <button
               key={index}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-4 py-2 rounded-lg font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                 selectedDate.toDateString() === date.toDateString()
-                  ? 'bg-black text-white'
-                  : 'bg-gray-200 text-gray-700'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 text-gray-800 hover:bg-blue-100'
               }`}
               onClick={() => handleDateChange(date)}
             >
@@ -63,7 +64,7 @@ const Home: React.FC = () => {
 
       <button
         onClick={toggleAddTaskForm}
-        className="fixed bottom-8 right-8 p-4 rounded-full bg-black text-white text-2xl font-bold shadow-lg hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-500 transition-all"
+        className="fixed bottom-8 right-8 p-5 rounded-full bg-blue-600 text-white text-3xl font-bold shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-400 transition-all"
         title="Add Task"
       >
         +
